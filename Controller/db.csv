@@ -1,2 +1,2 @@
-setpoint_frio,setpoint_quente,pwm_circulacao
--25.0,55.0,85.0
+setpoint_quente,setpoint_frio,pwm_circulacao
+80,-20,100

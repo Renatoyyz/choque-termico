@@ -326,7 +326,7 @@ class IniciarCiclagem(QDialog):
                 if (float(valor_quente) >= self.dado.setpoint_quente_ciclo) and (float(valor_frio) <= self.dado.setpoint_frio_ciclo):
                     self.estado_ciclagem = "meio"
             elif self.estado_ciclagem == "meio" and self.dado.estabilizar_temperatura_ciclo == "sim":
-                if (float(valor_quente) >= self.dado.setpoint_quente_ciclo*0.98) and (float(valor_frio) <= self.dado.setpoint_frio_ciclo*1.02):
+                if (float(valor_quente) >= self.dado.setpoint_quente_ciclo*0.96) and (float(valor_frio) <= self.dado.setpoint_frio_ciclo*1.04):
                     if self.io.status_elevador == "quente":
                         self.tempo_corrente_quente += 1
                         if self.tempo_corrente_quente > int(self.dado.tempo_parte_quente_ciclo)*self.BASE_TEMPO:

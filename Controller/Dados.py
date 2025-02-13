@@ -2,6 +2,7 @@ import threading
 import time
 import pandas as pd
 from Controller.Pt100PTA9B import PTA9B
+import os
 
 class Dado:
     def __init__(self):
@@ -11,7 +12,18 @@ class Dado:
         self._aciona_buzzer = True
         self._path_db_csv = "/home/maeda/choque-termico/Controller/db.csv"
 
-        self.df = pd.read_csv(self._path_db_csv)
+        # Check if the CSV file exists and has data
+        if not os.path.exists(self._path_db_csv) or os.stat(self._path_db_csv).st_size == 0:
+            # Create default values if the file does not exist or is empty
+            default_data = {
+                'setpoint_quente': [80],
+                'setpoint_frio': [-20],
+                'pwm_circulacao': [100]
+            }
+            self.df = pd.DataFrame(default_data)
+            self.df.to_csv(self._path_db_csv, index=False)
+        else:
+            self.df = pd.read_csv(self._path_db_csv)
         
         self._cursor = 'cross'
         #self._cursor = 'none'
